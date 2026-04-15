@@ -20,4 +20,4 @@ if (-not ($javaVersionOutput -match 'version "21\.')) {
     exit 0
 }
 
-mvn -f apps/api/pom.xml test
+mvn -s config/maven/settings.xml -f apps/api/pom.xml test

@@ -11,7 +11,7 @@ pnpm install
 
 $javaVersionOutput = cmd /c "java -version 2>&1"
 Write-Host $javaVersionOutput
-mvn -version
+mvn -s config/maven/settings.xml -version
 
 if ($Ci) {
     Write-Host "已启用 CI 模式。"

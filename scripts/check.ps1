@@ -68,7 +68,7 @@ if (-not ($javaVersionOutput -match 'version "21\.')) {
 }
 
 Write-Host "运行后端质量门禁。"
-mvn -f apps/api/pom.xml test
+mvn -s config/maven/settings.xml -f apps/api/pom.xml test
 
 if ($Ci) {
     Write-Host "已启用 CI 模式。"

@@ -32,3 +32,5 @@ test       -> 前端测试；JDK 21 可用时运行后端测试
 db-reset   -> 当前提示 MySQL 阶段待接入
 hooks      -> 安装 pre-commit / pre-push 自动检查
 ```
+
+后端 Maven 命令使用项目内 `config/maven/settings.xml`，避免依赖用户全局 Maven 配置。

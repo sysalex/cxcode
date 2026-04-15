@@ -15,7 +15,7 @@ if (-not ($javaVersionOutput -match 'version "21\.')) {
 }
 
 if ($Detached) {
-    Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PWD\apps\api'; mvn spring-boot:run"
+    Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PWD'; mvn -s config/maven/settings.xml -f apps/api/pom.xml spring-boot:run"
     Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PWD'; pnpm --filter @cxcode/web dev"
     Write-Host "已用独立窗口启动后端和前端。"
     exit 0
@@ -23,4 +23,4 @@ if ($Detached) {
 
 Write-Host "请在另一个终端运行：pnpm --filter @cxcode/web dev"
 Set-Location apps\api
-mvn spring-boot:run
+mvn -s ..\..\config\maven\settings.xml spring-boot:run
