@@ -1,0 +1,22 @@
+{
+  "name": "@cxcode/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "build": "vue-tsc --noEmit && vite build"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "^6.0.3",
+    "element-plus": "^2.11.9",
+    "vite": "^7.2.7",
+    "vue": "^3.5.25",
+    "vue-router": "^4.6.3"
+  },
+  "devDependencies": {
+    "vue-tsc": "^3.1.8"
+  }
+}

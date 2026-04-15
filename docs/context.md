@@ -28,16 +28,24 @@
 - 服务端状态是考试时间、提交和阅卷的最终事实源。
 - 考试生命周期中的关键动作必须可审计。
 
-## 待决策事项
+## 已确认技术栈
+
+技术栈决策见 `docs/adr/0002-java-spring-boot-backend-stack.md`。
+
+- 前端：Vue 3 + Vite + TypeScript + Element Plus
+- 后端：Java 21 + Spring Boot 3.5.x + Maven
+- 数据库：MySQL 8.x
+- ORM：MyBatis-Plus
+- 权限：Spring Security
+- 缓存/锁/限流：Redis 后续接入
+
+## 仍待决策事项
 
 以下事项确定前需要写 ADR：
 
-- 前端框架
-- 后端框架
-- 数据库
-- 认证方案
-- 授权模型实现方式
 - 部署目标
-- 可观测技术栈
-- 测试框架和 E2E 工具
-
+- OpenAPI 生成方式
+- Redis 幂等和限流实现方式
+- MySQL migration 工具
+- 生产可观测技术栈
+- E2E 工具落地方式

@@ -1,0 +1,150 @@
+:root {
+  font-family:
+    Inter,
+    "Segoe UI",
+    "Microsoft YaHei",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  color: #18212f;
+  background: #f4f7fb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.exam-shell {
+  min-height: 100vh;
+}
+
+.exam-topbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 160px;
+  align-items: center;
+  gap: 24px;
+  padding: 28px clamp(16px, 4vw, 48px);
+  background: #ffffff;
+  border-bottom: 1px solid #d8e0ea;
+}
+
+.exam-topbar h1,
+.attempt-status h2,
+.exam-item h2,
+.question-item h2 {
+  margin: 0;
+  line-height: 1.25;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #39715f;
+  font-weight: 700;
+}
+
+.topbar-image {
+  width: 160px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.exam-list {
+  display: grid;
+  gap: 16px;
+  padding: 24px clamp(16px, 4vw, 48px);
+}
+
+.exam-item,
+.question-item {
+  background: #ffffff;
+  border: 1px solid #d8e0ea;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.exam-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.exam-item p,
+.attempt-status p {
+  margin: 8px 0;
+  color: #4b5b70;
+}
+
+.attempt-layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 20px;
+  padding: 24px clamp(16px, 4vw, 48px);
+}
+
+.attempt-status {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+  background: #ffffff;
+  border: 1px solid #d8e0ea;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.attempt-status .el-button {
+  width: 100%;
+  margin: 8px 0 0;
+}
+
+.question-list {
+  display: grid;
+  gap: 16px;
+}
+
+.question-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  color: #39715f;
+}
+
+.question-item .el-radio-group {
+  display: grid;
+  gap: 10px;
+}
+
+@media (max-width: 760px) {
+  .exam-topbar,
+  .attempt-layout,
+  .exam-item {
+    grid-template-columns: 1fr;
+  }
+
+  .exam-item {
+    align-items: stretch;
+  }
+
+  .attempt-status {
+    position: static;
+  }
+
+  .topbar-image {
+    width: 100%;
+    height: 120px;
+  }
+}

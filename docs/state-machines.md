@@ -70,4 +70,3 @@ PUBLISHED -> CORRECTED -> PUBLISHED
 
 - 成绩发布必须可审计。
 - 撤回和修正必须有原因码。
-

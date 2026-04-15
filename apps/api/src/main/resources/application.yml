@@ -1,0 +1,14 @@
+server:
+  port: 3000
+
+spring:
+  application:
+    name: cxcode-exam-api
+  profiles:
+    active: memory
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

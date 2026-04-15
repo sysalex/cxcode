@@ -22,13 +22,13 @@
 
 ## 计划中的命令映射
 
-最终映射取决于技术栈。典型 Web 项目可按以下方式落地：
+当前脚本映射：
 
 ```text
-setup      -> 安装依赖、复制 env 模板、启动本地基础服务
-dev        -> 启动 API、Web、数据库和 worker
-check      -> 格式检查、lint、类型检查、测试、构建
-test       -> 单元测试、集成测试、E2E 测试
-db-reset   -> 重建 schema 并加载 fixture
+setup      -> 安装前端依赖，并检查 Java/Maven 环境
+dev        -> 启动 Spring Boot API 和 Vue 前端
+check      -> 格式检查、lint、前端类型检查、前端测试、前端构建、后端测试
+test       -> 前端测试；JDK 21 可用时运行后端测试
+db-reset   -> 当前提示 MySQL 阶段待接入
 hooks      -> 安装 pre-commit / pre-push 自动检查
 ```

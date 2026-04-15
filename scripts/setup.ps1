@@ -5,10 +5,14 @@
 $ErrorActionPreference = "Stop"
 
 Write-Host "初始化入口"
-Write-Host "当前尚未选择应用技术栈。"
-Write-Host "技术栈确定后，在这里安装依赖、准备 env 文件，并启动需要的本地基础服务。"
+Write-Host "安装前端依赖，并检查 Java/Maven 环境。"
+
+pnpm install
+
+$javaVersionOutput = cmd /c "java -version 2>&1"
+Write-Host $javaVersionOutput
+mvn -version
 
 if ($Ci) {
     Write-Host "已启用 CI 模式。"
 }
-

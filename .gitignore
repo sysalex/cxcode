@@ -1,2 +1,7 @@
 .idea/
-
+.fastRequest/
+node_modules/
+dist/
+target/
+apps/**/target/
+apps/web/dist/

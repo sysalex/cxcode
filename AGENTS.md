@@ -52,5 +52,4 @@
 - `scripts/test.ps1`
 - `scripts/db-reset.ps1`
 
-技术栈确定后，这些脚本需要接入真实的依赖安装、服务启动、数据库、测试和构建命令。
-
+当前技术栈已确定为 Vue 3 + Java 21 + Spring Boot + MySQL + MyBatis-Plus + Spring Security。脚本已接入前端质量检查，并会在 Java 不是 21 时阻止后端质量门禁。

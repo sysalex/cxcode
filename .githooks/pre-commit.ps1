@@ -1,4 +1,3 @@
 ﻿$ErrorActionPreference = "Stop"
 
-& "$PSScriptRoot\..\scripts\check.ps1"
-
+& "$PSScriptRoot\..\scripts\test.ps1"

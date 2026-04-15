@@ -52,8 +52,23 @@ if ($missingFiles.Count -gt 0) {
 }
 
 Write-Host "Harness Engineering 基线文件完整。"
-Write-Host "当前尚未选择应用技术栈。"
-Write-Host "技术栈确定后，此脚本必须继续接入：格式检查、lint、类型检查、测试、架构边界检查、API 契约校验、构建。"
+
+Write-Host "运行前端质量门禁。"
+pnpm format:check
+pnpm lint
+pnpm --filter @cxcode/web typecheck
+pnpm --filter @cxcode/web test
+pnpm --filter @cxcode/web build
+
+$javaVersionOutput = cmd /c "java -version 2>&1"
+if (-not ($javaVersionOutput -match 'version "21\.')) {
+    Write-Host "当前 Java 不是 21，无法运行后端质量门禁。请安装 JDK 21 后执行：mvn -f apps/api/pom.xml test"
+    Write-Host $javaVersionOutput
+    exit 1
+}
+
+Write-Host "运行后端质量门禁。"
+mvn -f apps/api/pom.xml test
 
 if ($Ci) {
     Write-Host "已启用 CI 模式。"
