@@ -38,6 +38,14 @@ apps/api/src/main/resources/db/migration/
 V1__create_exam_core_tables.sql
 ```
 
+当前第二版 migration：
+
+```text
+V2__add_exam_core_table_comments.sql
+```
+
+V2 为阶段 2 核心表和字段补充 MySQL 注释。后续新增业务表或字段时，migration 必须同时写入 table comment 和 column comment，便于 Navicat、`information_schema`、排障和数据评审直接阅读。
+
 覆盖考试作答 MVP 所需表：
 
 - `exams`：考试基础信息、时间窗口、状态和关联试卷。

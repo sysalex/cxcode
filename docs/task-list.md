@@ -33,6 +33,7 @@
 - [x] 2.3 实现 MyBatis-Plus entity / mapper
 - [x] 2.4 用数据库仓储替换内存仓储
 - [x] 2.5 增加仓储集成测试
+- [x] 2.6 补齐 MySQL schema 表和字段注释
 
 ## 阶段 3：认证与权限
 

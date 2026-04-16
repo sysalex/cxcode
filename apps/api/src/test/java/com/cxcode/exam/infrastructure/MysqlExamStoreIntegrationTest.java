@@ -19,12 +19,27 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = ExamApiApplication.class)
 @ActiveProfiles("mysql")
 class MysqlExamStoreIntegrationTest {
+    private static final List<String> CORE_TABLES = List.of(
+            "exams",
+            "exam_candidates",
+            "papers",
+            "paper_questions",
+            "questions",
+            "question_options",
+            "attempts",
+            "answer_sheets",
+            "answer_items",
+            "submission_idempotency_records"
+    );
+
     @Autowired
     private ExamStore store;
 
@@ -85,5 +100,39 @@ class MysqlExamStoreIntegrationTest {
         );
         assertThat(repeated.attempt().submittedAt()).isEqualTo(submitted.attempt().submittedAt());
         assertThat(repeated.answerSheet().submittedAt()).isEqualTo(submitted.answerSheet().submittedAt());
+    }
+
+    @Test
+    void mysqlSchemaDocumentsCoreTablesAndColumnsWithComments() {
+        String tablePlaceholders = CORE_TABLES.stream().map(item -> "?").collect(Collectors.joining(", "));
+        Map<String, String> tableComments = jdbcTemplate.query(
+                "SELECT table_name, table_comment FROM information_schema.tables "
+                        + "WHERE table_schema = DATABASE() AND table_name IN (" + tablePlaceholders + ")",
+                (rs) -> {
+                    Map<String, String> result = new java.util.HashMap<>();
+                    while (rs.next()) {
+                        result.put(rs.getString("table_name"), rs.getString("table_comment"));
+                    }
+                    return result;
+                },
+                CORE_TABLES.toArray()
+        );
+
+        assertThat(tableComments).containsOnlyKeys(CORE_TABLES.toArray(String[]::new));
+        assertThat(tableComments)
+                .allSatisfy((tableName, comment) -> assertThat(comment)
+                        .as("table %s should have a comment", tableName)
+                        .isNotBlank());
+
+        List<String> uncommentedColumns = jdbcTemplate.queryForList(
+                "SELECT CONCAT(table_name, '.', column_name) FROM information_schema.columns "
+                        + "WHERE table_schema = DATABASE() AND table_name IN (" + tablePlaceholders + ") "
+                        + "AND COALESCE(column_comment, '') = '' "
+                        + "ORDER BY table_name, ordinal_position",
+                String.class,
+                CORE_TABLES.toArray()
+        );
+
+        assertThat(uncommentedColumns).isEmpty();
     }
 }

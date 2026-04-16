@@ -94,5 +94,6 @@ Playwright 测试文件使用 `*.e2e.ts` 命名，避免被 Vitest 单元测试�
 - 作答创建后再次开始同一考试会恢复原作答。
 - 自动保存会持久化答案和 revision。
 - 使用同一幂等键重复提交会返回同一业务结果。
+- 阶段 2 核心表和字段在 `information_schema` 中具备非空注释。
 
 本地运行前需要 MySQL 监听 `localhost:3306`，默认数据库为 `cxcode_exam`，默认账号为 `root`，密码为空；可通过 `MYSQL_USERNAME` 和 `MYSQL_PASSWORD` 覆盖。

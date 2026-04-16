@@ -6,6 +6,7 @@
 
 ### Added
 
+- 补齐阶段 2 MySQL 核心表和字段注释，并增加 schema 注释回归测试。
 - 记录阶段 2 MySQL migration 决策，采用 Flyway 管理数据库结构变更。
 - 接入 Flyway、MyBatis-Plus MySQL 仓储和 MySQL 仓储集成测试。
 - `dev.ps1` 支持选择后端 profile，`db-reset.ps1` 支持确认后重建本地 MySQL schema。
