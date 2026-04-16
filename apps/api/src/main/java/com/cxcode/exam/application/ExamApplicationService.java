@@ -15,6 +15,7 @@ import com.cxcode.exam.domain.SubmissionOutcome;
 
 import java.time.Clock;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class ExamApplicationService {
@@ -39,7 +40,7 @@ public class ExamApplicationService {
                         exam.durationMinutes()
                 ))
                 .toList();
-        return new CandidateExamList(exams, Instant.now(clock));
+        return new CandidateExamList(exams, now());
     }
 
     public AttemptView startOrResumeAttempt(String examId, String candidateId) {
@@ -60,14 +61,14 @@ public class ExamApplicationService {
     public AttemptView autoSave(String attemptId, String candidateId, long clientRevision, List<Answer> answers) {
         AttemptBundle bundle = requireAttemptBundle(attemptId);
         ensureCandidateOwnsAttempt(bundle.attempt(), candidateId);
-        Instant now = Instant.now(clock);
+        Instant savedAt = now();
         try {
             AnswerSheet saved = ExamDomainService.autoSave(
                     bundle.attempt(),
                     bundle.answerSheet(),
                     clientRevision,
                     answers,
-                    now
+                    savedAt
             );
             store.saveAnswerSheet(saved);
             recordAudit("answer.auto_saved", candidateId, bundle.exam().id(), bundle.attempt().id(), "success", null);
@@ -109,9 +110,9 @@ public class ExamApplicationService {
         List<Question> questions = store.getQuestionsByVersionIds(
                 paper.questions().stream().map(item -> item.questionVersionId()).toList()
         );
-        Instant now = Instant.now(clock);
-        Attempt attempt = ExamDomainService.createAttempt(store.nextId("attempt"), exam, candidateId, now);
-        AnswerSheet answerSheet = ExamDomainService.createAnswerSheet(store.nextId("answer-sheet"), attempt.id(), now);
+        Instant startedAt = now();
+        Attempt attempt = ExamDomainService.createAttempt(store.nextId("attempt"), exam, candidateId, startedAt);
+        AnswerSheet answerSheet = ExamDomainService.createAnswerSheet(store.nextId("answer-sheet"), attempt.id(), startedAt);
         AttemptBundle bundle = new AttemptBundle(exam, paper, questions, attempt, answerSheet);
         store.createAttemptBundle(bundle);
         recordAudit("attempt.created", candidateId, exam.id(), attempt.id(), "success", null);
@@ -130,7 +131,7 @@ public class ExamApplicationService {
                 bundle.attempt(),
                 bundle.answerSheet(),
                 kind,
-                Instant.now(clock)
+                now()
         );
         store.saveSubmission(outcome);
         store.saveSubmissionByIdempotencyKey(scopedKey, outcome);
@@ -160,8 +161,12 @@ public class ExamApplicationService {
                 bundle.attempt(),
                 bundle.answerSheet(),
                 ExamDomainService.toCandidatePaper(bundle.paper(), bundle.questions()),
-                Instant.now(clock)
+                now()
         );
+    }
+
+    private Instant now() {
+        return Instant.now(clock).truncatedTo(ChronoUnit.MICROS);
     }
 
     private void recordAudit(
@@ -179,8 +184,7 @@ public class ExamApplicationService {
                 attemptId,
                 result,
                 errorCode,
-                Instant.now(clock)
+                now()
         ));
     }
 }
-

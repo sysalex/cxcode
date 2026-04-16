@@ -28,11 +28,11 @@
 
 ```text
 setup      -> 安装前端依赖，并检查 Java/Maven 环境
-dev        -> 启动 Spring Boot API 和 Vue 前端
+dev        -> 启动 Spring Boot API 和 Vue 前端；可用 -ApiProfile mysql 切换 MySQL
 check      -> 格式检查、lint、前端类型检查、前端测试、前端构建、后端测试
 test       -> 前端测试；JDK 21 可用时运行后端测试
 e2e        -> 清理代理环境变量后运行 Playwright E2E
-db-reset   -> 当前提示 MySQL 阶段待接入
+db-reset   -> 使用 Flyway 清理并重建本地 MySQL schema；必须显式传入 -ConfirmReset
 hooks      -> 安装 pre-commit / pre-push 自动检查
 ```
 

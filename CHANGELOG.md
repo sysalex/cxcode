@@ -6,6 +6,10 @@
 
 ### Added
 
+- 记录阶段 2 MySQL migration 决策，采用 Flyway 管理数据库结构变更。
+- 接入 Flyway、MyBatis-Plus MySQL 仓储和 MySQL 仓储集成测试。
+- `dev.ps1` 支持选择后端 profile，`db-reset.ps1` 支持确认后重建本地 MySQL schema。
+- 补齐阶段 2 MySQL 与 MyBatis-Plus 回顾，并纳入 Harness 基线检查。
 - 增加 TDD 测试驱动开发规范。
 - 增加全局任务计划清单。
 - 增加阶段回顾目录。

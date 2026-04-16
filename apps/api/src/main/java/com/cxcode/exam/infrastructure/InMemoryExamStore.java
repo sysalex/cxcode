@@ -8,6 +8,7 @@ import com.cxcode.exam.domain.Exam;
 import com.cxcode.exam.domain.Paper;
 import com.cxcode.exam.domain.Question;
 import com.cxcode.exam.domain.SubmissionOutcome;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
+@Profile("memory")
 public class InMemoryExamStore implements ExamStore {
     private final Map<String, Exam> exams = new HashMap<>();
     private final Map<String, Paper> papers = new HashMap<>();
@@ -136,4 +138,3 @@ public class InMemoryExamStore implements ExamStore {
         return prefix + "-" + idCounter.incrementAndGet();
     }
 }
-

@@ -5,6 +5,7 @@
 ## 已完成回顾
 
 - [阶段 1：考试作答 MVP](phase-1-retrospective.md)
+- [阶段 2：MySQL 与 MyBatis-Plus](phase-2-retrospective.md)
 
 ## 文件命名
 

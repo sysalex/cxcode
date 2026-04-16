@@ -24,6 +24,41 @@ deleted_at
 
 存在并发编辑风险的数据应使用 `version` 做乐观锁。
 
+## 当前 MySQL Schema
+
+阶段 2 使用 Flyway 管理 MySQL schema，migration 文件位于：
+
+```text
+apps/api/src/main/resources/db/migration/
+```
+
+当前第一版 migration：
+
+```text
+V1__create_exam_core_tables.sql
+```
+
+覆盖考试作答 MVP 所需表：
+
+- `exams`：考试基础信息、时间窗口、状态和关联试卷。
+- `exam_candidates`：考试与考生分配关系。
+- `papers`：已分配试卷。
+- `paper_questions`：试卷内题目版本和顺序。
+- `questions`：题目版本、题型、题干、分值和题型扩展字段。
+- `question_options`：单选题选项。
+- `attempts`：考生作答记录和作答状态。
+- `answer_sheets`：答卷状态、版本和提交时间。
+- `answer_items`：答卷内答案项。
+- `submission_idempotency_records`：提交幂等键和业务结果引用。
+
+本地 `mysql` profile 默认连接：
+
+```text
+jdbc:mysql://localhost:3306/cxcode_exam
+username=${MYSQL_USERNAME:root}
+password=${MYSQL_PASSWORD:}
+```
+
 ## 不可变记录
 
 以下记录最终确认后不可变：

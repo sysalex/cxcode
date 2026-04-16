@@ -83,3 +83,16 @@ Playwright 测试文件使用 `*.e2e.ts` 命名，避免被 Vitest 单元测试�
 ## 时间与并发
 
 涉及考试时间的测试必须使用可控服务端时钟。涉及提交、自动保存、超时的测试必须覆盖重试或并发竞争。
+
+## MySQL 集成测试
+
+阶段 2 增加 MySQL 仓储集成测试，验证：
+
+- `mysql` profile 使用 MySQL 版 `ExamStore`。
+- Flyway migration 能创建核心表。
+- seed 数据可用于列出考生考试。
+- 作答创建后再次开始同一考试会恢复原作答。
+- 自动保存会持久化答案和 revision。
+- 使用同一幂等键重复提交会返回同一业务结果。
+
+本地运行前需要 MySQL 监听 `localhost:3306`，默认数据库为 `cxcode_exam`，默认账号为 `root`，密码为空；可通过 `MYSQL_USERNAME` 和 `MYSQL_PASSWORD` 覆盖。
