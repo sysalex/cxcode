@@ -12,6 +12,7 @@
 - 将 TDD、任务清单和 CHANGELOG 接入 Agent 工作流、DoD 和反馈循环。
 - 接入 Playwright，使用本机 Chrome 运行考试作答 E2E 测试。
 - 强化 PowerShell 脚本退出码检查，避免质量门禁和 E2E 失败被吞掉。
+- 补齐阶段 1 考试作答 MVP 回顾，并纳入 Harness 基线检查。
 
 ## 2026-04-15
 

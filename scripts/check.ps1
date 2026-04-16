@@ -46,6 +46,7 @@ $requiredFiles = @(
     "docs/runbook.md",
     "docs/task-list.md",
     "docs/retrospectives/README.md",
+    "docs/retrospectives/phase-1-retrospective.md",
     "docs/tasks/TEMPLATE.md",
     "docs/adr/TEMPLATE.md",
     "scripts/e2e.ps1",
