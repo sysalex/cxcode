@@ -4,6 +4,18 @@
 
 $ErrorActionPreference = "Stop"
 
+function Invoke-NativeCommand {
+    param(
+        [string]$Command,
+        [string[]]$Arguments = @()
+    )
+
+    & $Command @Arguments
+    if ($LASTEXITCODE -ne 0) {
+        throw "命令失败，退出码 $LASTEXITCODE：$Command $($Arguments -join ' ')"
+    }
+}
+
 Write-Host "测试入口"
 Write-Host "运行前端测试和后端测试。"
 
@@ -11,7 +23,11 @@ if ($Filter -ne "") {
     Write-Host "测试过滤条件：$Filter"
 }
 
-pnpm --filter @cxcode/web test
+Invoke-NativeCommand "pnpm" @("--filter", "@cxcode/web", "test")
+
+if ($Filter -eq "e2e") {
+    .\scripts\e2e.ps1
+}
 
 $javaVersionOutput = cmd /c "java -version 2>&1"
 if (-not ($javaVersionOutput -match 'version "21\.')) {
@@ -20,4 +36,4 @@ if (-not ($javaVersionOutput -match 'version "21\.')) {
     exit 0
 }
 
-mvn -s config/maven/settings.xml -f apps/api/pom.xml test
+Invoke-NativeCommand "mvn" @("-s", "config/maven/settings.xml", "-f", "apps/api/pom.xml", "test")

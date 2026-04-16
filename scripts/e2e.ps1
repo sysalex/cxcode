@@ -12,10 +12,14 @@ function Invoke-NativeCommand {
     }
 }
 
-if (-not (Test-Path ".git")) {
-    Write-Host "当前目录不是 git 仓库。初始化 git 后再安装 hooks。"
-    exit 0
-}
+Write-Host "E2E 测试入口"
+Write-Host "使用本机 Google Chrome，不下载 Playwright 浏览器。"
 
-Invoke-NativeCommand "git" @("config", "core.hooksPath", ".githooks")
-Write-Host "Git hooks 已安装，来源目录：.githooks"
+$env:all_proxy = ""
+$env:ALL_PROXY = ""
+$env:http_proxy = ""
+$env:HTTP_PROXY = ""
+$env:https_proxy = ""
+$env:HTTPS_PROXY = ""
+
+Invoke-NativeCommand "pnpm" @("--filter", "@cxcode/web", "test:e2e")

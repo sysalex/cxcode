@@ -34,13 +34,17 @@
 ## 标准任务循环
 
 1. 阅读任务，识别影响范围。
-2. 按 `docs/definition-of-ready.md` 检查任务是否可开始。
-3. 使用 `docs/tasks/TEMPLATE.md` 创建或更新任务计划。
-4. 做最小且完整的改动。
-5. 按 `docs/project-scripts.md` 运行本地质量门禁。
-6. 如果门禁失败，定位原因、修复、重新运行失败项。
-7. 行为变化时同步更新文档、ADR、API 契约和测试。
-8. 按 `docs/definition-of-done.md` 检查是否完成。
+2. 查阅 `docs/task-list.md`，确认任务状态和依赖。
+3. 按 `docs/definition-of-ready.md` 检查任务是否可开始。
+4. 判断是否属于 `docs/tdd.md` 的强制 TDD 范围。
+5. 使用 `docs/tasks/TEMPLATE.md` 创建或更新任务计划。
+6. 强制 TDD 任务先写失败测试，再写实现。
+7. 做最小且完整的改动。
+8. 按 `docs/project-scripts.md` 运行本地质量门禁。
+9. 如果门禁失败，定位原因、修复、重新运行失败项。
+10. 行为变化时同步更新文档、ADR、API 契约和测试。
+11. 更新 `docs/task-list.md` 和 `CHANGELOG.md`。
+12. 按 `docs/definition-of-done.md` 检查是否完成。
 
 ## 标准脚本入口
 
@@ -50,6 +54,7 @@
 - `scripts/dev.ps1`
 - `scripts/check.ps1`
 - `scripts/test.ps1`
+- `scripts/e2e.ps1`
 - `scripts/db-reset.ps1`
 
 当前技术栈已确定为 Vue 3 + Java 21 + Spring Boot + MySQL + MyBatis-Plus + Spring Security。脚本已接入前端质量检查，并会在 Java 不是 21 时阻止后端质量门禁。

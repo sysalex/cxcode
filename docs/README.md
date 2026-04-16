@@ -17,6 +17,7 @@
 - `security.md`：认证、权限、威胁模型和审计要求
 - `observability.md`：日志、指标、链路追踪、告警和运行诊断
 - `testing.md`：测试分层、测试数据和关键场景
+- `tdd.md`：测试驱动开发规范
 - `quality-gates.md`：本地和 CI 质量门禁
 - `hooks.md`：本地 hooks 自动化
 - `definition-of-ready.md`：任务开始标准
@@ -28,6 +29,8 @@
 - `dependencies.md`：依赖和合规治理
 - `project-scripts.md`：标准脚本入口
 - `runbook.md`：发布、回滚和故障处理手册
+- `task-list.md`：全局任务计划清单
+- `retrospectives/`：阶段回顾
 
 ## 模板
 

@@ -4,6 +4,18 @@
 
 $ErrorActionPreference = "Stop"
 
+function Invoke-NativeCommand {
+    param(
+        [string]$Command,
+        [string[]]$Arguments = @()
+    )
+
+    & $Command @Arguments
+    if ($LASTEXITCODE -ne 0) {
+        throw "命令失败，退出码 $LASTEXITCODE：$Command $($Arguments -join ' ')"
+    }
+}
+
 Write-Host "开发环境启动入口"
 Write-Host "启动 Spring Boot API 和 Vue 前端。"
 
@@ -23,4 +35,4 @@ if ($Detached) {
 
 Write-Host "请在另一个终端运行：pnpm --filter @cxcode/web dev"
 Set-Location apps\api
-mvn -s ..\..\config\maven\settings.xml spring-boot:run
+Invoke-NativeCommand "mvn" @("-s", "..\..\config\maven\settings.xml", "spring-boot:run")
